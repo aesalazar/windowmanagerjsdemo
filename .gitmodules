@@ -1,0 +1,4 @@
+[submodule "scalejs.windowfactory"]
+	path = scalejs.windowfactory
+	url = https://github.com/EikosPartners/scalejs.windowfactory.git
+	branch = master
