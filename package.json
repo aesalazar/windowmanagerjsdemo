@@ -1,0 +1,18 @@
+{
+  "name": "scalejswindowfactorydemo",
+  "version": "0.0.1",
+  "description": "Demostrates the Eikos scaleJS WindowFactory module in Electron, OpenFin, and Web",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Electron",
+    "OpenFin",
+    "Node.js",
+    "scaleJS",
+    "WindowFactory"
+  ],
+  "author": "Ernie Salazar",
+  "license": "ISC"
+}
