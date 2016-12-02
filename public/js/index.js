@@ -7,7 +7,15 @@ var reconnectInterval;
 //Attempt to reconnect to the server if connection is closed
 function attemptReconnect(){
     //Force a refresh in case something was changed on the server
-    connect(function(){ document.location.reload(); });
+    connect(function(){ 
+        var windowSizes = windowfactory._windows.map(function(win){
+            var pos = win.getPosition();
+            return { left: pos.left, top: pos.top, width: win.getWidth(), height: win.getHeight() };
+        });
+
+        sessionStorage.setItem("windowSizes", JSON.stringify(windowSizes));
+        document.location.reload(); 
+    });
 }
 
 //Make the connection to the server and fire the callback when ready or fire if already connected
@@ -58,14 +66,21 @@ function logText(text){
 }
 
 //Create a new window
-function createWindow(){
-    var win = windowfactory.Window({
-        url: 'child.html',
-        left: 100,
-        top: 200,
-        width: 400,
-        height: 400
-    });
+function createWindow(windowSizes){
+    var state = windowSizes ? windowSizes : { left: 100, top: 200, width: 400, height: 400 };
+    state.url = "child.html";
+
+    //Create the window
+    var win = windowfactory.Window(state);
 }
 
-connect();
+//Create initial connection and check for state
+connect(function(){
+    var windowSizes = sessionStorage.getItem("windowSizes");
+    if (!windowSizes)
+        return;
+
+    windowSizes = JSON.parse(windowSizes);
+    for(var i = 0; i < windowSizes.length; i++)
+        createWindow(windowSizes[i]);
+});
