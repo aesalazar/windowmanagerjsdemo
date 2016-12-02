@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "jshintConfig": {
+    "esversion": 6
+  },
   "keywords": [
     "Electron",
     "OpenFin",
@@ -14,5 +17,10 @@
     "WindowFactory"
   ],
   "author": "Ernie Salazar",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "electron-builder": "^10.3.0",
+    "express": "^4.14.0",
+    "ws": "^1.1.1"
+  }
 }

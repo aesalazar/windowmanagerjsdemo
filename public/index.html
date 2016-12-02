@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Demonstration of the Eikos scaleJS WindowFactory module in Electron, OpenFin, and Web</title>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <div class="divMain">
+        <div class="divButtons">
+            <div>
+                <button onclick="createWindow()">Create Window</button>
+            </div>
+            <div>
+                <textarea id="logTextArea"></textarea>
+            </div>
+        </div>
+
+        <div id="divOutputArea" class="divOutput">
+        </div>
+    </div>
+
+    <script type="text/javascript" src="scalejs.windowfactory.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>

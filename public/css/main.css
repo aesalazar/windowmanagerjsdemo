@@ -1,0 +1,32 @@
+body {
+  background: black;
+  color: yellow;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+a:link, a:visited {
+  color: red; 
+  text-decoration: underline;
+}
+
+img {
+  height: 40px;
+  width: 40px;
+  padding-right: 15px;
+  vertical-align: middle;
+}
+
+button {
+  background: #f3d311;
+  color: black;
+  font-weight: bold;
+  height: 30px;
+  width: 100%;
+  margin-bottom: 5px;
+  font-size: medium;
+}
+
+.divMain{
+  padding: 10px;
+}
