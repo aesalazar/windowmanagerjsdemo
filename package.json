@@ -1,7 +1,7 @@
 {
   "name": "scalejswindowfactorydemo",
   "version": "0.0.1",
-  "description": "Demostrates the Eikos scaleJS WindowFactory module in Electron, OpenFin, and Web",
+  "description": "Demostrates the Eikos scaleJS.windowfactory module in Electron, OpenFin, and Web",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
