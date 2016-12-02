@@ -1,7 +1,26 @@
 html {
     height: 100%;
+
 }
-body{
-    height: 100%;
+
+body {
+    height: calc(100% - 2px);
     margin: 0;
+    border-width: 1px;
+    border-style: solid;
+    
+}
+
+.divMain{
+  padding-bottom: 5px;
+}
+
+.divHeader {
+    width: 100%;
+    background: #1D1D1D;
+    text-align: right;
+    padding: 3px 0;
+}
+.divHeader img {
+    margin-right: 5px;
 }

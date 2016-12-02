@@ -1,3 +1,15 @@
+button {
+  font-weight: bold;
+  height: 30px;
+  width: 100%;
+  margin-bottom: 5px;
+  font-size: medium;
+}
+
+.divMain{
+  padding: 10px;
+}
+
 .divButtons {
   float:left;
   width: 300px;

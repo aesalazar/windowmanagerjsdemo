@@ -12,9 +12,14 @@
     <link rel="stylesheet" href="css/child.css">
 </head>
 
-<body class="window-drag">
-    <div class="divMain">
-        <button onclick="closeWindow();">X</button>
+<body class="">
+    <div>
+        <div class="divHeader window-drag">
+            <img onclick="minimizeWindow();"src="images/iconMin.png" />
+            <img onclick="maximizeWindow();" src="images/iconMax.png" />
+            <img onclick="closeWindow();" src="images/iconClose.png" />
+        </div>
+
     </div>
 
     <script type="text/javascript" src="scalejs.windowfactory.js"></script>
