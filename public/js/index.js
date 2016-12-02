@@ -1,9 +1,14 @@
 var logTextArea = document.getElementById("logTextArea");
 var divOutputArea = document.getElementById("divOutputArea");
-var latencyStartTime;
-var currentLatency;
 var ws;
 var logCount = 0;
+var reconnectInterval;
+
+//Attempt to reconnect to the server if connection is closed
+function attemptReconnect(){
+    //Force a refresh in case something was changed on the server
+    connect(function(){ document.location.reload(); });
+}
 
 //Make the connection to the server and fire the callback when ready or fire if already connected
 function connect(callback) {
@@ -21,10 +26,20 @@ function connect(callback) {
     var endpoint = "ws://" + hostname + port + "/";
     ws = new WebSocket(endpoint);
 
+    //When connection is opened
     ws.onopen = function(ev) {
         logText("WS connection established: " + (ws.readyState === ws.OPEN));    
+        clearInterval(reconnectInterval);
         if (callback != null)
             callback();
+    };
+
+    //When connection is closed
+    ws.onclose = function(ev){
+        if (ev.code !== 1000) {
+            logText("WS connection closed, retrying...");
+            reconnectInterval = setTimeout(attemptReconnect, 1000);
+        }
     };
 
     //Listen for responses from the server
