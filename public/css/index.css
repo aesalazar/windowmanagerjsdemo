@@ -17,7 +17,7 @@ button {
 }
 
 .divButtons textarea {
-  height: calc(100vh - 110px);
+  height: calc(100vh - 75px);
   width: calc(100% - 6px);
   background-color: #3a3a3a;
   color: white;
