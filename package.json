@@ -2,9 +2,10 @@
   "name": "scalejswindowfactorydemo",
   "version": "0.0.1",
   "description": "Demostrates the Eikos scaleJS.windowfactory module in Electron, OpenFin, and Web",
+  "company": "Eikos Partners",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "electron": "electron ./electron/app/main --debug=5858 --endpoint=http://localhost:5000/"
   },
   "jshintConfig": {
     "esversion": 6
@@ -19,8 +20,42 @@
   "author": "Ernie Salazar",
   "license": "ISC",
   "dependencies": {
-    "electron-builder": "^10.3.0",
     "express": "^4.14.0",
     "ws": "^1.1.1"
+  },
+  "devDependencies": {
+    "electron": "^1.4.10",
+    "electron-builder": "^10.5.0",
+    "electron-prebuilt": "^1.4.10"
+  },
+  "electronBuilder": {
+    "build": {
+      "productName": "Eikos Partners scalejs.windowfactory Demo",
+      "appId": "EikosPartners.ScaleJsWindowFactoryDemo",
+      "asar": false,
+      "extraFiles": [
+        "scalejs.windowfactory/dist/scalejs.windowfactory.js"
+      ],
+      "win": {
+        "iconUrl": "http://localhost:5000/images/eikos-logo-multi.ico",
+        "target": "nsis"
+      },
+      "nsis": {
+        "oneClick": false,
+        "allowElevation": false
+      },
+      "linux": {
+        "target": "AppImage",
+        "category": "Development"
+      },
+      "mac": {
+        "target": "dmg"
+      }
+    },
+    "directories": {
+      "output": "electron/output",
+      "app": "electron/app",
+      "buildResources": "electron/resources"
+    }
   }
 }

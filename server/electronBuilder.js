@@ -1,4 +1,4 @@
-const packagejson = require("../package.json");
+const packageJson = require("../package.json");
 const builder = require("electron-builder");
 
 const mimes = new Map();
@@ -8,14 +8,14 @@ mimes.set("zip", "zip");
 mimes.set("AppImage", "x-executable");
 
 //Development package.json, see https://goo.gl/5jVxoO
-const devMetadata  = packagejson.electronBuilder;
+const devMetadata  = packageJson.electronBuilder;
 
 //Application package.json
 const appMetadata = {
-    name: packagejson.name,
-    version: packagejson.version,
-    description: packagejson.description,
-    author: packagejson.author
+    name: packageJson.name,
+    version: packageJson.version,
+    description: packageJson.description,
+    author: packageJson.author
 };
 
 function buildPromise(){
