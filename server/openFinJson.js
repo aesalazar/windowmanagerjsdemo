@@ -1,10 +1,12 @@
+const packageJson = require("../package.json");
+
 function createJson(host){
     const json = {
         "devtools_port": 9090,
         "startup_app": {
-            "name": "Node Performance Measure",
+            "name": packageJson.electronBuilder.build.productName,
             "url": "http://" + host + "/",
-            "uuid": "NodePerfMeasure",
+            "uuid": packageJson.name,
             "applicationIcon": "http://" + host + "/images/eikos-logo-multi.ico",
             "autoShow": true,
             "defaultWidth": 800,
@@ -15,10 +17,10 @@ function createJson(host){
             "version": "stable"
         },
         "shortcut": {
-            "company": "Eikos Partners",
-            "description": "Latency Measurements of a simple Node.js project",
+            "company": packageJson.company,
+            "description": packageJson.description,
             "icon": "http://" + host + "/images/eikos-logo-multi.ico",
-            "name": "Node Performance Measure"
+            "name": packageJson.electronBuilder.build.productName
         }
     };
     return json;
