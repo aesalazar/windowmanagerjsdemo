@@ -2,18 +2,34 @@ var logTextArea = document.getElementById("logTextArea");
 var divOutputArea = document.getElementById("divOutputArea");
 var ws;
 var logCount = 0;
+var windowAppIndex = -1;
 
 //Attempt to reconnect to the server if connection is closed
 function attemptReconnect(){
-    //Force a refresh in case something was changed on the server
     connect(function(){ 
-        var windowSizes = windowfactory._windows.map(function(win){
+        //Force a refresh in case something was changed on the server
+        var isBrowser = windowfactory.runtime.isBrowser;
+        var children = isBrowser ? windowfactory._windows : windowfactory.Window.getAll();
+
+        var windowSizes = children.map(function(win){
             var pos = win.getPosition();
-            return { left: pos.left, top: pos.top, width: win.getWidth(), height: win.getHeight() };
+            return { left: pos.left, top: pos.top, width: win.getWidth(), height: win.getHeight(), windowAppIndex: win.windowAppIndex };
         });
 
+        if (!isBrowser){
+            //Remove the top which is the main window
+            windowSizes.shift();
+            var mainWin = windowfactory.Window.getCurrent();
+
+            //Close all but the main
+            children.forEach(function(child) {
+                if (child !== mainWin)
+                    child.close();
+            });
+        }
+
         sessionStorage.setItem("windowSizes", JSON.stringify(windowSizes));
-        document.location.reload(); 
+        document.location.reload();
     });
 }
 
@@ -64,21 +80,27 @@ function logText(text){
 }
 
 //Create a new window
-function createWindow(windowSizes){
-    var state = windowSizes ? windowSizes : { left: 100, top: 200, width: 400, height: 400 };
+function createWindow(windowSize){
+    var state = windowSize 
+        ? { left: windowSize.left, top: windowSize.top, width: windowSize.width, height: windowSize.height } 
+        : { left: 100, top: 200, width: 400, height: 400 };
+
     state.url = "child.html";
 
     //Create the window
     var win = windowfactory.Window(state);
+    win.windowAppIndex = windowSize && windowSize.windowAppIndex  ? windowSize.windowAppIndex : ++windowAppIndex;
 }
 
 //Create initial connection and check for state
 connect(function(){
-    var windowSizes = sessionStorage.getItem("windowSizes");
-    if (!windowSizes)
+    var windowSizesJson = sessionStorage.getItem("windowSizes");
+    if (!windowSizesJson)
         return;
 
-    windowSizes = JSON.parse(windowSizes);
-    for(var i = 0; i < windowSizes.length; i++)
-        createWindow(windowSizes[i]);
+    windowfactory.onReady(function(){
+        windowSizes = JSON.parse(windowSizesJson);
+        for(var i = 0; i < windowSizes.length; i++)
+            createWindow(windowSizes[i]);
+    });
 });
