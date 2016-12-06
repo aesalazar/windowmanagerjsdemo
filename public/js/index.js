@@ -1,5 +1,5 @@
 var logTextArea = document.getElementById("logTextArea");
-var divOutputArea = document.getElementById("divOutputArea");
+var logOutput = document.getElementById("logOutput");
 var ws;
 var logCount = 0;
 var windowAppIndex = -1;
@@ -91,6 +91,13 @@ function createWindow(windowSize){
     var win = windowfactory.Window(state);
     win.windowAppIndex = windowSize && windowSize.windowAppIndex  ? windowSize.windowAppIndex : ++windowAppIndex;
 }
+
+//Setup message listener
+windowfactory.onReady(function(){
+    windowfactory._internalBus.on('window-message', function(e){
+        logOutput.textContent = e + "\n" + logOutput.textContent;
+    });
+});
 
 //Create initial connection and check for state
 connect(function(){
