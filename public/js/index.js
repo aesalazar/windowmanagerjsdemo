@@ -2,7 +2,6 @@ var logTextArea = document.getElementById("logTextArea");
 var divOutputArea = document.getElementById("divOutputArea");
 var ws;
 var logCount = 0;
-var reconnectInterval;
 
 //Attempt to reconnect to the server if connection is closed
 function attemptReconnect(){
@@ -37,7 +36,6 @@ function connect(callback) {
     //When connection is opened
     ws.onopen = function(ev) {
         logText("WS connection established: " + (ws.readyState === ws.OPEN));    
-        clearInterval(reconnectInterval);
         if (callback != null)
             callback();
     };
@@ -46,7 +44,7 @@ function connect(callback) {
     ws.onclose = function(ev){
         if (ev.code !== 1000) {
             logText("WS connection closed, retrying...");
-            reconnectInterval = setTimeout(attemptReconnect, 1000);
+            setTimeout(attemptReconnect, 1000);
         }
     };
 
