@@ -5,7 +5,6 @@ const ws = require('ws');
 
 const routes = require('./server/routes');
 const api = require('./server/api');
-const Response = require('./server/response');
 
 //Port settings
 const webPort = 5000;
@@ -27,36 +26,17 @@ wss.on('connection', (ws) => {
     console.log(ws.upgradeReq.headers);
     console.log('\n');
 
+    api.registerConnection(ws);
+
     ws.on('message', (raw) => {
-        let message;
-        
-        try {
-            message = JSON.parse(raw);
-        } catch (err) {
-            return console.error("Error parsing message: %s\n", raw);
-        }
-
-        if (message && message.call) {
-            //keep ping request as close to the "metal" as possible (should be a separate server in production)
-            if (message.call === "ping"){
-                ws.send("pong" + message.stamp);
-                return;
-            }
-            
-            //Process general message
-            console.log('received: %s\n', raw);
-
-            if (!api[message.call])
-                return;
-                
-            let args = message.args || [];
-            args.unshift(new Response(ws, message));
-            args.unshift(ws);
-            api[message.call](...args);
-        }
+        console.log('received: %s\n', raw);
+        const message = JSON.parse(raw);
+        let args = message.args || [];
+        api[message.call](...args);
     });
 
     ws.on('close', (status, clientMsg) => {
+        api.unregisterConnection(ws);
         console.log(`Client disconnected (${status}) with message: ${clientMsg}\n`);
     });
 });
