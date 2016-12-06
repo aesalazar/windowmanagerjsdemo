@@ -12,14 +12,22 @@
     <link rel="stylesheet" href="css/child.css">
 </head>
 
-<body class="">
+<body>
     <div>
         <div class="divHeader window-drag">
-            <img onclick="minimizeWindow();"src="images/iconMin.png" />
-            <img onclick="maximizeWindow();" src="images/iconMax.png" />
+            <label id="labelHeader"/>
             <img onclick="closeWindow();" src="images/iconClose.png" />
+            <img onclick="maximizeWindow();" src="images/iconMax.png" />
+            <img onclick="minimizeWindow();"src="images/iconMin.png" />
         </div>
-
+        <div class="divControls">
+            <button onclick="sendToLocal()">To Local</button>
+            <input type="text" />
+            <button onclick="sendToAll()">To Server</button>
+        </div>
+        <div class="divTextArea">
+            <textarea></textarea>
+        </div>
     </div>
 
     <script type="text/javascript" src="scalejs.windowfactory.js"></script>

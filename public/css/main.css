@@ -14,3 +14,9 @@ button {
   background: #f3d311;
   color: black;
 }
+
+textarea {
+  background-color: #3a3a3a;
+  color: white;
+  font-size: medium;
+}

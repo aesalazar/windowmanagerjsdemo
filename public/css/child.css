@@ -16,10 +16,30 @@ body {
 
 .divHeader {
     width: 100%;
-    background: #1D1D1D;
-    text-align: right;
+    background: #1F1F1F;
     padding: 3px 0;
 }
 .divHeader img {
     margin-right: 5px;
+    float: right;
+    padding-top: 5px;
+}
+.divHeader label{
+    margin-left: 5px;
+    margin-top: 2px;
+    color: #CFCFCF;
+}
+
+.divControls{
+    margin: 20px 10px 10px 10px;
+    text-align: center;
+}
+
+.divTextArea{
+    padding: 10px;
+    height: calc(100vh - 105px);
+}
+.divTextArea textarea{
+    width: calc(100% - 7px);
+    height: 100%;
 }
