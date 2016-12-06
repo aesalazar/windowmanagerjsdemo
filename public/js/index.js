@@ -66,6 +66,13 @@ function connect(callback) {
 
     //Listen for responses from the server
     ws.onmessage = function (ev) {
+        //Process data message
+        var args = JSON.parse(ev.data).args;
+        var newMsg = {
+            type: "local",
+            text: args[0] + " " + args[1]
+        };
+        windowfactory._internalBus.emit("window-message", newMsg);
     };
 }
 
@@ -92,10 +99,19 @@ function createWindow(windowSize){
     win.windowAppIndex = windowSize && windowSize.windowAppIndex  ? windowSize.windowAppIndex : ++windowAppIndex;
 }
 
+function sendMessage(msg){
+    connect(function() {
+        ws.send(JSON.stringify({call: "broadcastMessage", args: [msg.type, msg.text]}));
+    });
+}
+
 //Setup message listener
-windowfactory.onReady(function(){
-    windowfactory._internalBus.on('window-message', function(e){
-        logOutput.textContent = e + "\n" + logOutput.textContent;
+windowfactory.onReady(function() {
+    windowfactory._internalBus.on('window-message', function(msg) {
+        if (msg.type === "local")
+            logOutput.textContent = msg.text + "\n" + logOutput.textContent;
+        else 
+            sendMessage(msg);
     });
 });
 
