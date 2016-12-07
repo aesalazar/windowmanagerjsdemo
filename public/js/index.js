@@ -51,7 +51,8 @@ function connect(callback) {
 
     //When connection is opened
     ws.onopen = function(ev) {
-        logText("WS connection established: " + (ws.readyState === ws.OPEN));    
+        logText("WS connection established: " + (ws.readyState === ws.OPEN));   
+        ws.send(JSON.stringify({call: "registerConnection", args: [windowfactory.runtime.name]}));
         if (callback != null)
             callback();
     };
@@ -101,7 +102,7 @@ function createWindow(windowSize){
 
 function sendMessage(msg){
     connect(function() {
-        ws.send(JSON.stringify({call: "broadcastMessage", args: [msg.type, msg.text]}));
+        ws.send(JSON.stringify({call: "broadcastMessage", args: [msg.type, msg.text, msg.agentType]}));
     });
 }
 

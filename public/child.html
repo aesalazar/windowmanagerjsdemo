@@ -21,9 +21,12 @@
             <img onclick="minimizeWindow();"src="images/iconMin.png" />
         </div>
         <div class="divControls">
-            <button onclick="sendToLocal()">To Local</button>
+            <button onclick="sendToLocal()">Local</button>
             <input id="textMessage" type="text" />
-            <button onclick="sendToServer()">To Server</button>
+            <button onclick="sendToServer()">All</button>
+            <button onclick="sendToServer('Firefox')">FireFox</button>
+            <button onclick="sendToServer('OpenFin')">OpenFin</button>
+            <button onclick="sendToServer('Chrome')">Chrome</button>
         </div>
         <div class="divTextArea">
             <textarea id="logOutput"></textarea>
