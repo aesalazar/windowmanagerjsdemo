@@ -26,13 +26,11 @@ wss.on('connection', (ws) => {
     console.log(ws.upgradeReq.headers);
     console.log('\n');
 
-    api.registerConnection(ws);
-
     ws.on('message', (raw) => {
         console.log('received: %s\n', raw);
         const message = JSON.parse(raw);
         let args = message.args || [];
-        api[message.call](...args);
+        api[message.call](ws, ...args);
     });
 
     ws.on('close', (status, clientMsg) => {
