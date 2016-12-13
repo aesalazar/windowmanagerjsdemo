@@ -1,21 +1,20 @@
 var logOutput = document.getElementById("logOutput");
 var labelHeader = document.getElementById('labelHeader');
+var self;
 
 function minimizeWindow() {
-    windowfactory.Window.getCurrent().minimize();
+    self.minimize();
 }
 
 function maximizeWindow() {
-    var win = windowfactory.Window.getCurrent();
-    
-    if (win.isMaximized())
-        win.restore();
+    if (self.isMaximized())
+        self.restore();
     else
-        win.maximize();
+        self.maximize();
 }
 
 function closeWindow() {
-    windowfactory.Window.getCurrent().close();
+    self.close();
 }
 
 function sendToLocal() {
@@ -31,8 +30,8 @@ function sendToServer() {
 }
 
 windowfactory.onReady(function(){
-    var id = windowfactory.Window.getCurrent().windowAppIndex;
-    labelHeader.innerText = "Window " + id;    
+    self = windowfactory.Window.getCurrent();
+    labelHeader.innerText = self.getTitle();    
     
     //Setup message listener
     windowfactory._internalBus.on('window-message', function(msg) {

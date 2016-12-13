@@ -93,10 +93,10 @@ function createWindow(windowSize){
         : { left: 100, top: 200, width: 400, height: 400 };
 
     state.url = "child.html";
+    state.title = "Window " + (windowSize && windowSize.windowAppIndex  ? windowSize.windowAppIndex : ++windowAppIndex);
 
     //Create the window
     var win = windowfactory.Window(state);
-    win.windowAppIndex = windowSize && windowSize.windowAppIndex  ? windowSize.windowAppIndex : ++windowAppIndex;
 }
 
 function sendMessage(msg){
