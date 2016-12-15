@@ -8,19 +8,19 @@ var windowAppIndex = -1;
 function attemptReconnect(){
     connect(function(){ 
         //Force a refresh in case something was changed on the server
-        var isBrowser = windowfactory.runtime.isBrowser;
-        var children = isBrowser ? windowfactory._windows : windowfactory.Window.getAll();
+        var windows = windowfactory.Window.getAll();
+        var mainWin = windowfactory.Window.getCurrent();
 
-        var windowSizes = children.map(function(win){
-            var pos = win.getPosition();
-            return { left: pos.left, top: pos.top, width: win.getWidth(), height: win.getHeight(), windowAppIndex: win.windowAppIndex };
-        });
+        var windowSizes = windows
+            .filter(function(win){
+                return win !== windowfactory.Window.current;
+            })
+            .map(function(win){
+                var pos = win.getPosition();
+                return { left: pos.left, top: pos.top, width: win.getWidth(), height: win.getHeight(), windowAppIndex: win.windowAppIndex };
+            });
 
-        if (!isBrowser){
-            //Remove the top which is the main window
-            windowSizes.shift();
-            var mainWin = windowfactory.Window.getCurrent();
-
+        if (!windowfactory.runtime.isBrowser){
             //Close all but the main
             children.forEach(function(child) {
                 if (child !== mainWin)
