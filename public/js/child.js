@@ -26,7 +26,7 @@ function sendToLocal() {
 function sendToServer() {
     var txt = document.getElementById('textMessage');
     var msg = {type: windowfactory.runtime.name, text: labelHeader.innerText + ": " + txt.value};
-    windowfactory.messagebus.send('internal-message', msg);
+    windowfactory.messagebus.send('external-message', msg);
 }
 
 windowfactory.onReady(function(){
@@ -35,7 +35,6 @@ windowfactory.onReady(function(){
     
     //Setup message listener
     windowfactory.messagebus.on('internal-message', function(msg) {
-        if (msg.type === "local")
-            logOutput.textContent = msg.text + "\n" + logOutput.textContent;
+        logOutput.textContent = msg.text + "\n" + logOutput.textContent;
     });
 });

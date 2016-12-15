@@ -73,6 +73,7 @@ function connect(callback) {
             text: args[0] + " " + args[1]
         };
         windowfactory.messagebus.send("internal-message", newMsg);
+        logMessage(newMsg);
     };
 }
 
@@ -99,7 +100,11 @@ function createWindow(windowSize){
     var win = windowfactory.Window(state);
 }
 
-function sendMessage(msg){
+function logMessage(msg){
+    logOutput.textContent = msg.text + "\n" + logOutput.textContent;
+}
+
+function serverMessage(msg){
     connect(function() {
         ws.send(JSON.stringify({call: "broadcastMessage", args: [msg.type, msg.text]}));
     });
@@ -107,12 +112,8 @@ function sendMessage(msg){
 
 //Setup message listener
 windowfactory.onReady(function() {
-    windowfactory.messagebus.on('internal-message', function(msg) {
-        if (msg.type === "local")
-            logOutput.textContent = msg.text + "\n" + logOutput.textContent;
-        else 
-            sendMessage(msg);
-    });
+    windowfactory.messagebus.on('internal-message', logMessage);
+    windowfactory.messagebus.on('external-message', serverMessage);
 });
 
 //Create initial connection and check for state
