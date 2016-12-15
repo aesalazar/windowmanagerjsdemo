@@ -20,13 +20,13 @@ function closeWindow() {
 function sendToLocal() {
     var txt = document.getElementById('textMessage');
     var msg = {type: "local", text: labelHeader.innerText + ": " + txt.value};
-    windowfactory._internalBus.emit('window-message', msg);
+    windowfactory.messagebus.send('internal-message', msg);
 }
 
 function sendToServer() {
     var txt = document.getElementById('textMessage');
     var msg = {type: windowfactory.runtime.name, text: labelHeader.innerText + ": " + txt.value};
-    windowfactory._internalBus.emit('window-message', msg);
+    windowfactory.messagebus.send('internal-message', msg);
 }
 
 windowfactory.onReady(function(){
@@ -34,7 +34,7 @@ windowfactory.onReady(function(){
     labelHeader.innerText = self.getTitle();    
     
     //Setup message listener
-    windowfactory._internalBus.on('window-message', function(msg) {
+    windowfactory.messagebus.on('internal-message', function(msg) {
         if (msg.type === "local")
             logOutput.textContent = msg.text + "\n" + logOutput.textContent;
     });

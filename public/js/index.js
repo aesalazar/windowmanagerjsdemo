@@ -72,7 +72,7 @@ function connect(callback) {
             type: "local",
             text: args[0] + " " + args[1]
         };
-        windowfactory._internalBus.emit("window-message", newMsg);
+        windowfactory.messagebus.send("internal-message", newMsg);
     };
 }
 
@@ -107,7 +107,7 @@ function sendMessage(msg){
 
 //Setup message listener
 windowfactory.onReady(function() {
-    windowfactory._internalBus.on('window-message', function(msg) {
+    windowfactory.messagebus.on('internal-message', function(msg) {
         if (msg.type === "local")
             logOutput.textContent = msg.text + "\n" + logOutput.textContent;
         else 
