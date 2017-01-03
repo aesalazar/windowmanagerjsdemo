@@ -5,7 +5,8 @@
   "company": "Eikos Partners",
   "main": "app.js",
   "scripts": {
-    "electron": "electron ./electron/app/main --debug=5858 --endpoint=http://localhost:5000/"
+    "electron": "electron ./electron/app/main --debug=5858 --endpoint=http://localhost:5000/",
+    "electron-build": "node ./server/electronBuildCurrent.js"
   },
   "jshintConfig": {
     "esversion": 6
