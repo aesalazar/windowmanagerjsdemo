@@ -21,6 +21,7 @@ function sendToLocal() {
     var txt = document.getElementById('textMessage');
     var msg = {type: "local", text: labelHeader.innerText + ": " + txt.value};
     windowfactory.messagebus.send('internal-message', msg);
+    logMessage(msg);
 }
 
 function sendToServer() {
@@ -29,12 +30,14 @@ function sendToServer() {
     windowfactory.messagebus.send('external-message', msg);
 }
 
+function logMessage(msg) {
+    logOutput.textContent = msg.text + "\n" + logOutput.textContent;
+}
+
 windowfactory.onReady(function(){
     self = windowfactory.Window.getCurrent();
-    labelHeader.innerText = self.getTitle();    
-    
+    labelHeader.innerText = self.getTitle();
+
     //Setup message listener
-    windowfactory.messagebus.on('internal-message', function(msg) {
-        logOutput.textContent = msg.text + "\n" + logOutput.textContent;
-    });
+    windowfactory.messagebus.on('internal-message', logMessage);
 });
