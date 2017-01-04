@@ -16,7 +16,7 @@ body {
 
 .divHeader {
     width: 100%;
-    background: #1F1F1F;
+    background: #4c4a40;
     padding: 3px 0;
 }
 .divHeader img {
@@ -31,13 +31,22 @@ body {
 }
 
 .divControls{
-    margin: 20px 10px 10px 10px;
+    margin: 20px 10px 5px 10px;
     text-align: center;
+}
+.divControls input{
+    width: 200px;
+}
+.divControls button{
+    width: 65px;
+}
+.divControls div{
+    margin-top: 5px;
 }
 
 .divTextArea{
     padding: 10px;
-    height: calc(100vh - 105px);
+    height: calc(100vh - 125px);
 }
 .divTextArea textarea{
     width: calc(100% - 7px);
