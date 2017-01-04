@@ -13,7 +13,7 @@ function attemptReconnect(){
 
         var windowSizes = windows
             .filter(function(win){
-                return win !== windowfactory.Window.current;
+                return win !== mainWin;
             })
             .map(function(win){
                 var pos = win.getPosition();
