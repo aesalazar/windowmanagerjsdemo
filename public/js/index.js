@@ -22,7 +22,7 @@ function attemptReconnect(){
 
         if (!windowfactory.runtime.isBrowser){
             //Close all but the main
-            children.forEach(function(child) {
+            windows.forEach(function(child) {
                 if (child !== mainWin)
                     child.close();
             });
