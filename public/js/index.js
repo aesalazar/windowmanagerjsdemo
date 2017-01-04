@@ -10,6 +10,7 @@ function attemptReconnect(){
         //Force a refresh in case something was changed on the server
         var windows = windowfactory.Window.getAll();
         var mainWin = windowfactory.Window.getCurrent();
+        var isBrowser = windowfactory.runtime.isBrowser;
 
         var windowSizes = windows
             .filter(function(win){
@@ -17,16 +18,9 @@ function attemptReconnect(){
             })
             .map(function(win){
                 var pos = win.getPosition();
+                if (!isBrowser) win.close();
                 return { left: pos.left, top: pos.top, width: win.getWidth(), height: win.getHeight(), windowAppIndex: win.windowAppIndex };
             });
-
-        if (!windowfactory.runtime.isBrowser){
-            //Close all but the main
-            windows.forEach(function(child) {
-                if (child !== mainWin)
-                    child.close();
-            });
-        }
 
         sessionStorage.setItem("windowSizes", JSON.stringify(windowSizes));
         document.location.reload();
