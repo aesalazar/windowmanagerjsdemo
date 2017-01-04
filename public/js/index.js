@@ -8,25 +8,19 @@ var windowAppIndex = -1;
 function attemptReconnect(){
     connect(function(){ 
         //Force a refresh in case something was changed on the server
+        var windows = windowfactory.Window.getAll();
+        var mainWin = windowfactory.Window.getCurrent();
         var isBrowser = windowfactory.runtime.isBrowser;
-        var children = isBrowser ? windowfactory._windows : windowfactory.Window.getAll();
 
-        var windowSizes = children.map(function(win){
-            var pos = win.getPosition();
-            return { left: pos.left, top: pos.top, width: win.getWidth(), height: win.getHeight(), windowAppIndex: win.windowAppIndex };
-        });
-
-        if (!isBrowser){
-            //Remove the top which is the main window
-            windowSizes.shift();
-            var mainWin = windowfactory.Window.getCurrent();
-
-            //Close all but the main
-            children.forEach(function(child) {
-                if (child !== mainWin)
-                    child.close();
+        var windowSizes = windows
+            .filter(function(win){
+                return win !== mainWin;
+            })
+            .map(function(win){
+                var pos = win.getPosition();
+                if (!isBrowser) win.close();
+                return { left: pos.left, top: pos.top, width: win.getWidth(), height: win.getHeight(), windowAppIndex: win.windowAppIndex };
             });
-        }
 
         sessionStorage.setItem("windowSizes", JSON.stringify(windowSizes));
         document.location.reload();
@@ -73,7 +67,8 @@ function connect(callback) {
             type: "local",
             text: args[0] + " " + args[1]
         };
-        windowfactory._internalBus.emit("window-message", newMsg);
+        windowfactory.messagebus.send("internal-message", newMsg);
+        logMessage(newMsg);
     };
 }
 
@@ -94,13 +89,17 @@ function createWindow(windowSize){
         : { left: 100, top: 200, width: 400, height: 400 };
 
     state.url = "child.html";
+    state.title = "Window " + (windowSize && windowSize.windowAppIndex  ? windowSize.windowAppIndex : ++windowAppIndex);
 
     //Create the window
     var win = windowfactory.Window(state);
-    win.windowAppIndex = windowSize && windowSize.windowAppIndex  ? windowSize.windowAppIndex : ++windowAppIndex;
 }
 
-function sendMessage(msg){
+function logMessage(msg){
+    logOutput.textContent = msg.text + "\n" + logOutput.textContent;
+}
+
+function serverMessage(msg){
     connect(function() {
         ws.send(JSON.stringify({call: "broadcastMessage", args: [msg.type, msg.text, msg.agentType]}));
     });
@@ -108,12 +107,8 @@ function sendMessage(msg){
 
 //Setup message listener
 windowfactory.onReady(function() {
-    windowfactory._internalBus.on('window-message', function(msg) {
-        if (msg.type === "local")
-            logOutput.textContent = msg.text + "\n" + logOutput.textContent;
-        else 
-            sendMessage(msg);
-    });
+    windowfactory.messagebus.on('internal-message', logMessage);
+    windowfactory.messagebus.on('external-message', serverMessage);
 });
 
 //Create initial connection and check for state

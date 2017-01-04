@@ -1,27 +1,27 @@
 var logOutput = document.getElementById("logOutput");
 var labelHeader = document.getElementById('labelHeader');
+var self;
 
 function minimizeWindow() {
-    windowfactory.Window.getCurrent().minimize();
+    self.minimize();
 }
 
 function maximizeWindow() {
-    var win = windowfactory.Window.getCurrent();
-    
-    if (win.isMaximized())
-        win.restore();
+    if (self.isMaximized())
+        self.restore();
     else
-        win.maximize();
+        self.maximize();
 }
 
 function closeWindow() {
-    windowfactory.Window.getCurrent().close();
+    self.close();
 }
 
 function sendToLocal() {
     var txt = document.getElementById('textMessage');
     var msg = {type: "local", text: labelHeader.innerText + ": " + txt.value};
-    windowfactory._internalBus.emit('window-message', msg);
+    windowfactory.messagebus.send('internal-message', msg);
+    logMessage(msg);
 }
 
 function sendToServer(agentType) {
@@ -30,16 +30,17 @@ function sendToServer(agentType) {
     if (agentType)
         msg.agentType = agentType;
 
-    windowfactory._internalBus.emit('window-message', msg);
+    windowfactory.messagebus.send('external-message', msg);
+}
+
+function logMessage(msg) {
+    logOutput.textContent = msg.text + "\n" + logOutput.textContent;
 }
 
 windowfactory.onReady(function(){
-    var id = windowfactory.Window.getCurrent().windowAppIndex;
-    labelHeader.innerText = "Window " + id;    
-    
+    self = windowfactory.Window.getCurrent();
+    labelHeader.innerText = self.getTitle();
+
     //Setup message listener
-    windowfactory._internalBus.on('window-message', function(msg) {
-        if (msg.type === "local")
-            logOutput.textContent = msg.text + "\n" + logOutput.textContent;
-    });
+    windowfactory.messagebus.on('internal-message', logMessage);
 });
