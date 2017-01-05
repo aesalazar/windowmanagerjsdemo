@@ -1,4 +1,4 @@
-[submodule "scalejs.windowfactory"]
-	path = scalejs.windowfactory
-	url = https://github.com/EikosPartners/scalejs.windowfactory.git
+[submodule "windowmanagerjs"]
+	path = windowmanagerjs
+	url = https://github.com/EikosPartners/windowmanagerjs
 	branch = master
