@@ -39,13 +39,13 @@ function connect(callback) {
     var hostname = location.hostname;
     var port = location.port.length > 0 ? ":" + location.port : "";
 
-    //Open the connection to the server
-    var endpoint = "ws://" + hostname + port + "/";
+    //Open the connection to the server and provide the agent type
+    var endpoint = "ws://" + hostname + port + "/?agent=" + windowfactory.runtime.name;
     ws = new WebSocket(endpoint);
 
     //When connection is opened
     ws.onopen = function(ev) {
-        logText("WS connection established: " + (ws.readyState === ws.OPEN));    
+        logText("WS connection established: " + (ws.readyState === ws.OPEN));   
         if (callback != null)
             callback();
     };
@@ -100,7 +100,9 @@ function logMessage(msg){
 
 function serverMessage(msg){
     connect(function() {
-        ws.send(JSON.stringify({call: "broadcastMessage", args: [msg.type, msg.text]}));
+        const args = [msg.type, msg.text];
+        if (msg.agentType) args.push(msg.agentType);
+        ws.send(JSON.stringify({call: "broadcastMessage", args: args}));
     });
 }
 

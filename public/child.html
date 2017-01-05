@@ -2,7 +2,6 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <!--<title>Child Window</title>-->
     <meta charset="utf-8"/>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
@@ -21,9 +20,16 @@
             <img onclick="minimizeWindow();"src="images/iconMin.png" />
         </div>
         <div class="divControls">
-            <button onclick="sendToLocal()">To Local</button>
-            <input id="textMessage" type="text" />
-            <button onclick="sendToServer()">To Server</button>
+            <button onclick="sendToLocal()">Local</button>
+            <input id="textMessage" type="text" placeholder="Enter message to send..."/>
+            <button onclick="sendToServer()">All</button>
+            <div>
+                <button onclick="sendToServer('Chrome')">Chrome</button>
+                <button onclick="sendToServer('Edge')">Edge</button>
+                <button onclick="sendToServer('Electron')">Electron</button>
+                <button onclick="sendToServer('Firefox')">FireFox</button>
+                <button onclick="sendToServer('OpenFin')">OpenFin</button>
+            </div>
         </div>
         <div class="divTextArea">
             <textarea id="logOutput"></textarea>

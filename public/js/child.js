@@ -24,9 +24,12 @@ function sendToLocal() {
     logMessage(msg);
 }
 
-function sendToServer() {
+function sendToServer(agentType) {
     var txt = document.getElementById('textMessage');
     var msg = {type: windowfactory.runtime.name, text: labelHeader.innerText + ": " + txt.value};
+    if (agentType)
+        msg.agentType = agentType;
+
     windowfactory.messagebus.send('external-message', msg);
 }
 

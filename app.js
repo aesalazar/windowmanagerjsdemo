@@ -5,6 +5,7 @@ const ws = require('ws');
 
 const routes = require('./server/routes');
 const api = require('./server/api');
+const utils = require('./server/utils');
 
 //Port settings
 const webPort = 5000;
@@ -26,8 +27,11 @@ wss.on('connection', (ws) => {
     console.log(ws.upgradeReq.headers);
     console.log('\n');
 
-    api.registerConnection(ws);
+    //Determine the agent type if provided and register the connection
+    const queryParams = utils.parseQueryString(ws.upgradeReq.url);
+    api.registerConnection(ws, (queryParams && queryParams.agent) || void 0);
 
+    //Setup the listeners
     ws.on('message', (raw) => {
         console.log('received: %s\n', raw);
         const message = JSON.parse(raw);
