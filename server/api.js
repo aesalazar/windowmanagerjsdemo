@@ -8,8 +8,8 @@ function unregisterConnection(ws){
     channels.delete(ws);
 }
 
-function broadcastMessage(ws, type, text, agentType){
-    for (let [key, val] of channels) 
+function broadcastMessage(type, text, agentType){
+    for (let [key, val] of channels.entries()) 
         if (!agentType || val === agentType)
             key.send(JSON.stringify({call: "broadcastMessage", args: [type, text]}));
 }
