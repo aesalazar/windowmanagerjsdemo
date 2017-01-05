@@ -3,7 +3,7 @@ const path = require("path");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
-const wfPath = path.join(__dirname, "../../scalejs.windowfactory/dist/scalejs.windowfactory.js");
+const wfPath = path.join(__dirname, "../../windowmanagerjs/dist/windowmanager.js");
 const wf = require(wfPath);
 
 let mainWindow;

@@ -1,7 +1,7 @@
 {
-  "name": "scalejswindowfactorydemo",
+  "name": "windowmanagerjsdemo",
   "version": "0.0.1",
-  "description": "Demostrates the Eikos scaleJS.windowfactory module in Electron, OpenFin, and Web",
+  "description": "Demostrates the Eikos windowmanagerjs module in Electron, OpenFin, and Web",
   "company": "Eikos Partners",
   "main": "app.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "OpenFin",
     "Node.js",
     "scaleJS",
-    "WindowFactory"
+    "windowmanagerjs"
   ],
   "author": "Ernie Salazar",
   "license": "ISC",
@@ -31,11 +31,11 @@
   },
   "electronBuilder": {
     "build": {
-      "productName": "Eikos Partners scalejs.windowfactory Demo",
-      "appId": "EikosPartners.ScaleJsWindowFactoryDemo",
+      "productName": "Eikos Partners windowmanagerjs Demo",
+      "appId": "EikosPartners.windowmanagerjsdemo",
       "asar": false,
       "extraFiles": [
-        "scalejs.windowfactory/dist/scalejs.windowfactory.js"
+        "windowmanagerjs/dist/windowmanager.js"
       ],
       "win": {
         "iconUrl": "http://localhost:5000/images/eikos-logo-multi.ico",

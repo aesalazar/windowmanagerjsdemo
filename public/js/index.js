@@ -8,9 +8,9 @@ var windowAppIndex = -1;
 function attemptReconnect(){
     connect(function(){ 
         //Force a refresh in case something was changed on the server
-        var windows = windowfactory.Window.getAll();
-        var mainWin = windowfactory.Window.getCurrent();
-        var isBrowser = windowfactory.runtime.isBrowser;
+        var windows = windowmanager.Window.getAll();
+        var mainWin = windowmanager.Window.getCurrent();
+        var isBrowser = windowmanager.runtime.isBrowser;
 
         var windowSizes = windows
             .filter(function(win){
@@ -40,7 +40,7 @@ function connect(callback) {
     var port = location.port.length > 0 ? ":" + location.port : "";
 
     //Open the connection to the server and provide the agent type
-    var endpoint = "ws://" + hostname + port + "/?agent=" + windowfactory.runtime.name;
+    var endpoint = "ws://" + hostname + port + "/?agent=" + windowmanager.runtime.name;
     ws = new WebSocket(endpoint);
 
     //When connection is opened
@@ -66,7 +66,7 @@ function connect(callback) {
             type: "local",
             text: args[0] + " " + args[1]
         };
-        windowfactory.messagebus.send("internal-message", newMsg);
+        windowmanager.messagebus.send("internal-message", newMsg);
         logMessage(newMsg);
     };
 }
@@ -91,7 +91,7 @@ function createWindow(windowSize){
     state.title = "Window " + (windowSize && windowSize.windowAppIndex  ? windowSize.windowAppIndex : ++windowAppIndex);
 
     //Create the window
-    var win = windowfactory.Window(state);
+    var win = windowmanager.Window(state);
 }
 
 function logMessage(msg){
@@ -107,9 +107,9 @@ function serverMessage(msg){
 }
 
 //Setup message listener
-windowfactory.onReady(function() {
-    windowfactory.messagebus.on('internal-message', logMessage);
-    windowfactory.messagebus.on('external-message', serverMessage);
+windowmanager.onReady(function() {
+    windowmanager.messagebus.on('internal-message', logMessage);
+    windowmanager.messagebus.on('external-message', serverMessage);
 });
 
 //Create initial connection and check for state
@@ -118,7 +118,7 @@ connect(function(){
     if (!windowSizesJson)
         return;
 
-    windowfactory.onReady(function(){
+    windowmanager.onReady(function(){
         windowSizes = JSON.parse(windowSizesJson);
         for(var i = 0; i < windowSizes.length; i++)
             createWindow(windowSizes[i]);

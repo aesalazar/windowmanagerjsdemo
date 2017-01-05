@@ -20,27 +20,27 @@ function closeWindow() {
 function sendToLocal() {
     var txt = document.getElementById('textMessage');
     var msg = {type: "local", text: labelHeader.innerText + ": " + txt.value};
-    windowfactory.messagebus.send('internal-message', msg);
+    windowmanager.messagebus.send('internal-message', msg);
     logMessage(msg);
 }
 
 function sendToServer(agentType) {
     var txt = document.getElementById('textMessage');
-    var msg = {type: windowfactory.runtime.name, text: labelHeader.innerText + ": " + txt.value};
+    var msg = {type: windowmanager.runtime.name, text: labelHeader.innerText + ": " + txt.value};
     if (agentType)
         msg.agentType = agentType;
 
-    windowfactory.messagebus.send('external-message', msg);
+    windowmanager.messagebus.send('external-message', msg);
 }
 
 function logMessage(msg) {
     logOutput.textContent = msg.text + "\n" + logOutput.textContent;
 }
 
-windowfactory.onReady(function(){
-    self = windowfactory.Window.getCurrent();
+windowmanager.onReady(function(){
+    self = windowmanager.Window.getCurrent();
     labelHeader.innerText = self.getTitle();
 
     //Setup message listener
-    windowfactory.messagebus.on('internal-message', logMessage);
+    windowmanager.messagebus.on('internal-message', logMessage);
 });
