@@ -3,6 +3,7 @@ const path = require("path");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
+//Windowfactory path should be absolute
 const wfPath = path.join(__dirname, "../../scalejs.windowfactory/dist/scalejs.windowfactory.js");
 const wf = require(wfPath);
 
@@ -34,7 +35,7 @@ function createWindow () {
   });
 
     // Open the DevTools.
-    mainWindow.webContents.openDevTools();
+    //mainWindow.webContents.openDevTools();
 }
 
 app.on('ready', createWindow);

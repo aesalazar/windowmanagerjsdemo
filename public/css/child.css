@@ -7,11 +7,7 @@ body {
     margin: 0;
     border-width: 1px;
     border-style: solid;
-    border-color: #AFAFAF
-}
-
-.divMain{
-  padding-bottom: 5px;
+    border-color: #AFAFAF;
 }
 
 .divHeader {

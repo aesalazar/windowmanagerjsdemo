@@ -1,7 +1,7 @@
 //Imports
 const http = require('http');
 const express = require('express');
-const ws = require('ws');
+const websocket = require('ws');
 
 const routes = require('./server/routes');
 const api = require('./server/api');
@@ -13,7 +13,7 @@ const webPort = 5000;
 //Setup the web and websocket servers
 const app = express();
 const server = http.createServer(app);
-const wss = new ws.Server({ server: server });
+const wsServer = new websocket.Server({ server: server });
 
 //Expose the public folder
 app.use(express.static('public'));
@@ -22,7 +22,7 @@ app.use(express.static('public'));
 app.use('/', routes);
 
 //Set up the websocket listener
-wss.on('connection', (ws) => {
+wsServer.on('connection', (ws) => {
     console.log('Connection Established:');
     console.log(ws.upgradeReq.headers);
     console.log('\n');
