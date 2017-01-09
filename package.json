@@ -6,7 +6,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "openfin": "openfin --launch --config http://localhost:5000/app.json",
+    "openfin": "node_modules/.bin/openfin --launch --config http://localhost:5000/app.json",
     "electron": "electron ./electron/app/main --debug=5858 --endpoint=http://localhost:5000/",
     "electron-build": "node ./server/electronBuildCurrent.js"
   },
@@ -28,7 +28,8 @@
   },
   "devDependencies": {
     "electron": "^1.4.13",
-    "electron-builder": "^10.17.3"
+    "electron-builder": "^10.17.3",
+    "openfin-cli": "^1.1.5"
   },
   "electronBuilder": {
     "build": {
