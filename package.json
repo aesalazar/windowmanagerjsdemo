@@ -5,6 +5,7 @@
   "company": "Eikos Partners",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "openfin": "openfin --launch --config http://localhost:5000/app.json",
     "electron": "electron ./electron/app/main --debug=5858 --endpoint=http://localhost:5000/",
     "electron-build": "node ./server/electronBuildCurrent.js"
