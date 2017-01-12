@@ -5,9 +5,13 @@ const fs = require('fs');
 const electronBuilder = require('./electronBuilder');
 const openFinJson = require('./openFinJson');
 
-//Expose windowfactory main file
-router.get('/scalejs.windowfactory.js', function(req, res, next){
-    res.sendFile('scalejs.windowfactory.js', { root: 'scalejs.windowfactory/dist' });
+//Expose windowmanager main file
+router.get('/windowmanager.js', function(req, res, next){
+    res.sendFile('windowmanager.js', { root: 'windowmanagerjs/dist' });
+});
+
+router.get('/windowmanager.js.map', function(req, res, next){
+    res.sendFile('windowmanager.js.map', { root: 'windowmanagerjs/dist' });
 });
 
 //Install page for OpenFin Application

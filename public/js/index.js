@@ -6,11 +6,11 @@ var windowAppIndex = -1;
 
 //Attempt to reconnect to the server if connection is closed
 function attemptReconnect(){
-    connect(function(){ 
+    connect(function(){
         //Force a refresh in case something was changed on the server
-        var windows = windowfactory.Window.getAll();
-        var mainWin = windowfactory.Window.getCurrent();
-        var isBrowser = windowfactory.runtime.isBrowser;
+        var windows = windowmanager.Window.getAll();
+        var mainWin = windowmanager.Window.getCurrent();
+        var isBrowser = windowmanager.runtime.isBrowser;
 
         var windowSizes = windows
             .filter(function(win){
@@ -34,18 +34,18 @@ function connect(callback) {
             callback();
         return;
     }
-    
+
     //Create the url for the WebSocket
     var hostname = location.hostname;
     var port = location.port.length > 0 ? ":" + location.port : "";
 
     //Open the connection to the server and provide the agent type
-    var endpoint = "ws://" + hostname + port + "/?agent=" + windowfactory.runtime.name;
+    var endpoint = "ws://" + hostname + port + "/?agent=" + windowmanager.runtime.name;
     ws = new WebSocket(endpoint);
 
     //When connection is opened
     ws.onopen = function(ev) {
-        logText("WS connection established: " + (ws.readyState === ws.OPEN));   
+        logText("WS connection established: " + (ws.readyState === ws.OPEN));
         if (callback != null)
             callback();
     };
@@ -66,7 +66,7 @@ function connect(callback) {
             type: "local",
             text: args[0] + " " + args[1]
         };
-        windowfactory.messagebus.send("internal-message", newMsg);
+        windowmanager.messagebus.send("internal-message", newMsg);
         logMessage(newMsg);
     };
 }
@@ -83,15 +83,15 @@ function logText(text){
 
 //Create a new window
 function createWindow(windowSize){
-    var state = windowSize 
-        ? { left: windowSize.left, top: windowSize.top, width: windowSize.width, height: windowSize.height } 
+    var state = windowSize
+        ? { left: windowSize.left, top: windowSize.top, width: windowSize.width, height: windowSize.height }
         : { left: 100, top: 200, width: 400, height: 400 };
 
     state.url = "child.html";
     state.title = "Window " + (windowSize && windowSize.windowAppIndex  ? windowSize.windowAppIndex : ++windowAppIndex);
 
     //Create the window
-    var win = windowfactory.Window(state);
+    var win = new windowmanager.Window(state);
 }
 
 function logMessage(msg){
@@ -107,9 +107,9 @@ function serverMessage(msg){
 }
 
 //Setup message listener
-windowfactory.onReady(function() {
-    windowfactory.messagebus.on('internal-message', logMessage);
-    windowfactory.messagebus.on('external-message', serverMessage);
+windowmanager.onReady(function() {
+    windowmanager.messagebus.on('internal-message', logMessage);
+    windowmanager.messagebus.on('external-message', serverMessage);
 });
 
 //Create initial connection and check for state
@@ -118,7 +118,7 @@ connect(function(){
     if (!windowSizesJson)
         return;
 
-    windowfactory.onReady(function(){
+    windowmanager.onReady(function(){
         windowSizes = JSON.parse(windowSizesJson);
         for(var i = 0; i < windowSizes.length; i++)
             createWindow(windowSizes[i]);

@@ -3,15 +3,15 @@ const path = require("path");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
-//Windowfactory path should be absolute
-const wfPath = path.join(__dirname, "../../scalejs.windowfactory/dist/scalejs.windowfactory.js");
+// windowmanager path should be absolute
+const wfPath = path.join(__dirname, "../../windowmanagerjs/dist/windowmanager.js");
 const wf = require(wfPath);
 
 let mainWindow;
 
 function createWindow () {
   mainWindow = new BrowserWindow({
-    width: 800, 
+    width: 800,
     height: 600,
     webPreferences: {
         nodeIntegration: false,
@@ -21,8 +21,8 @@ function createWindow () {
 
   //Determine the endpoint
   const epArg = process.argv.find(arg => arg.indexOf("--endpoint") >= 0);
-  const ep = epArg 
-      ? epArg.substr(epArg.indexOf("=") + 1) 
+  const ep = epArg
+      ? epArg.substr(epArg.indexOf("=") + 1)
       : require("./package.json").endPoint;
 
   // and load the index.html of the app.
