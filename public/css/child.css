@@ -31,10 +31,11 @@ body {
     text-align: center;
 }
 .divControls input{
-    width: 200px;
+    width: 234px;
 }
 .divControls button{
-    width: 65px;
+    width: 56px;
+    padding:0;
 }
 .divControls div{
     margin-top: 5px;
