@@ -2,7 +2,7 @@ var logTextArea = document.getElementById("logTextArea");
 var logOutput = document.getElementById("logOutput");
 var ws;
 var logCount = 0;
-var windowAppIndex = -1;
+var windowAppIndex = 0;
 
 //Attempt to reconnect to the server if connection is closed
 function attemptReconnect(){
