@@ -7,7 +7,7 @@ function createJson(host){
             "name": packageJson.electronBuilder.build.productName,
             "url": "http://" + host + "/",
             "uuid": packageJson.name,
-            "applicationIcon": "http://" + host + "/images/eikos-logo-multi.ico",
+            "icon": "http://" + host + "/images/eikos-logo-multi.ico",
             "autoShow": true,
             "defaultWidth": 800,
             "defaultHeight": 600

@@ -36,9 +36,6 @@
       "productName": "Eikos Partners windowmanager Demo",
       "appId": "EikosPartners.WindowManagerDemo",
       "asar": false,
-      "extraFiles": [
-        "windowmanagerjs/dist/windowmanager.js"
-      ],
       "win": {
         "iconUrl": "http://localhost:5000/images/eikos-logo-multi.ico",
         "target": "nsis"
