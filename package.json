@@ -1,7 +1,7 @@
 {
   "name": "windowmanagerdemo",
   "version": "0.0.1",
-  "description": "Demostrates the Eikos windowmanager module in Electron, OpenFin, and Web",
+  "description": "Demonstrates the Eikos windowmanager module in Electron, OpenFin, and Web",
   "company": "Eikos Partners",
   "main": "app.js",
   "scripts": {
