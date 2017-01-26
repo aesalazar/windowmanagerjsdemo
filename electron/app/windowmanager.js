@@ -127,7 +127,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	var windowmanager = new _index.EventHandler(windowmanagerEventNames);
 
-	windowmanager.version = ("0.12.0");
+	windowmanager.version = ("0.12.2");
 	// runtime is set in the respective runtime
 	windowmanager.runtime = {
 	    name: undefined,
@@ -4051,26 +4051,43 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var http = (0, _require2.default)('http');
 	var https = (0, _require2.default)('https');
-	var url = (0, _require2.default)('url');
 
 	// TODO: Add support for an app.json packaged with this script.
 	// TODO: Add support for local file loading for window url.
 
+	function getArg(argName) {
+	    return process.argv.find(function (arg) {
+	        return arg.indexOf('--' + argName) >= 0;
+	    });
+	}
+
+	function extractArg(argName) {
+	    var arg = getArg(argName);
+
+	    if (arg) {
+	        var index = arg.indexOf('=') + 1;
+
+	        if (index < arg.length) {
+	            return arg.substr(index);
+	        }
+	    }
+	    // Return falsey value
+	}
+
 	// Determine the endpoint:
-	var epArg = process.argv.find(function (arg) {
-	    return arg.indexOf('--endpoint') >= 0;
-	});
-	var ep = epArg ? epArg.substr(epArg.indexOf('=') + 1) : (0, _require2.default)('./package.json').endPoint;
-	var configUrl = ep && url.resolve(ep, 'app.json'); // If ep is null, then configUrl is null
+	var packageJson = (0, _require2.default)('./package.json');
+	var endpoint = extractArg('endpoint') || packageJson.endpoint;
+	var configUrl = extractArg('config') || packageJson.config;
 	// Setup defaults (similar to OpenFin):
 	var defaultConfig = {
-	    url: ep,
+	    url: endpoint,
 	    width: 800,
 	    height: 500,
 	    frame: true,
 	    resizable: true,
-	    show: false,
+	    show: true,
 	    hasShadow: false,
+	    autoHideMenuBar: true,
 	    icon: 'favicon.ico',
 	    webPreferences: {
 	        nodeIntegration: false,
@@ -4097,7 +4114,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        // Start main window:
 	        mainWindow = new BrowserWindow(config);
-	        config.title = config.title == null ? mainWindow.id : config.title;
+	        config.title = config.title == null ? String(mainWindow.id) : config.title;
 
 	        // load the index.html of the app:
 	        mainWindow.loadURL(_url);
@@ -4161,18 +4178,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    // Get app.json:
-	    if (configUrl == null) {
-	        var err = 'No endpoint provided to start the app.';
+	    if (configUrl != null) {
+	        if (configUrl.indexOf('https') === 0) {
+	            https.get(configUrl, _response);
+	        } else if (configUrl.indexOf('http') === 0) {
+	            http.get(configUrl, _response);
+	        } else {
+	            // Unsupported protocol:
+	            var err = 'Server doesn\'t support endpoint for app.json (' + configUrl + ').';
 
-	        dialog.showErrorBox('ERROR', err);
-	        app.quit();
-	    } else if (configUrl.indexOf('https') === 0) {
-	        https.get(configUrl, _response);
-	    } else if (configUrl.indexOf('http') === 0) {
-	        http.get(configUrl, _response);
+	            dialog.showErrorBox('ERROR', err);
+	            app.quit();
+	        }
+	    } else if (endpoint != null) {
+	        // Load defaults:
+	        _start(defaultConfig);
 	    } else {
-	        // Unsupported protocol:
-	        var _err2 = 'Server doesn\'t support endpoint for app.json (' + configUrl + ').';
+	        var _err2 = 'No endpoint provided to start the app.';
 
 	        dialog.showErrorBox('ERROR', _err2);
 	        app.quit();
@@ -4996,6 +5018,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    frame: false,
 	    resizable: true,
 	    hasShadow: false,
+	    autoHideMenuBar: true,
 	    icon: 'favicon.ico',
 	    webPreferences: {
 	        nodeIntegration: false,
@@ -5039,7 +5062,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            _this._window = new BrowserWindow(config);
 	            _this._id = _this._window.id;
-	            config.title = config.title == null ? _this._id : config.title;
+	            config.title = config.title == null ? String(_this._id) : config.title;
 	            // The following logic works like (in logical if-order):
 	            //       1. If url has 'http' or 'file' at start, then use url, no modification.
 	            //       2. If url has no '/', take location.href and remove all stuff up till last /, then append url.

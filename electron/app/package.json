@@ -1,4 +1,4 @@
 {
     "main": "windowmanager.js",
-    "endPoint": "http://localhost:5000/"
+    "endpoint": "http://localhost:5000/"
 }
