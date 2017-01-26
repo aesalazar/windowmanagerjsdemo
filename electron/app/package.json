@@ -1,4 +1,4 @@
 {
     "main": "windowmanager.js",
-    "endpoint": "http://localhost:5000/"
+    "endpoint": "https://eikospartners.github.io/scalejs-editor/"
 }
