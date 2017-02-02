@@ -1,4 +1,0 @@
-[submodule "windowmanagerjs"]
-	path = windowmanagerjs
-	url = https://github.com/EikosPartners/windowmanagerjs.git
-	branch = master

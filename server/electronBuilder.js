@@ -1,6 +1,7 @@
 const packageJson = require("../package.json");
 const builder = require("electron-builder");
 const fs = require('fs');
+const windowmanager = require("windowmanager");
 
 const mimes = new Map();
 mimes.set("exe", "exe");
@@ -21,7 +22,7 @@ const appMetadata = {
 
 function buildPromise(){
     // Copy windowmanager as main.js for electron
-    fs.writeFileSync("./electron/app/windowmanager.js", fs.readFileSync("./windowmanagerjs/dist/windowmanager.js"));
+    fs.writeFileSync("./electron/app/windowmanager.js", fs.readFileSync(windowmanager.debug.scriptPath));
 
     return new Promise((resolve, reject) => {
         builder

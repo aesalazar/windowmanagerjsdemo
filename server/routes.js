@@ -1,18 +1,13 @@
 const express = require('express');
-const router = express.Router();
 const fs = require('fs');
+const windowmanager = require('windowmanager');
+const router = express.Router();
 
 const electronBuilder = require('./electronBuilder');
 const openFinJson = require('./openFinJson');
 
-//Expose windowmanager main file
-router.get('/windowmanager.js', function(req, res, next){
-    res.sendFile('windowmanager.js', { root: 'windowmanagerjs/dist' });
-});
-
-router.get('/windowmanager.js.map', function(req, res, next){
-    res.sendFile('windowmanager.js.map', { root: 'windowmanagerjs/dist' });
-});
+//Expose windowmanager scripts on root:
+router.use(express.static(windowmanager.distPath, { index: false }));
 
 //Install page for OpenFin Application
 router.get('/install', function(req, res, next){
