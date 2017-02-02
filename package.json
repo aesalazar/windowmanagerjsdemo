@@ -24,7 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.14.0",
-    "windowmanager": "^0.12.7",
+    "windowmanager": "^0.12.9",
     "ws": "^1.1.1"
   },
   "devDependencies": {
