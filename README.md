@@ -1,4 +1,5 @@
-## Demonstration of windowmanager module in Web, Electron and OpenFin
+## Demonstration of windowmanager module in Web, Electron and OpenFin 
+[![Build Status](https://travis-ci.org/aesalazar/windowmanagerjsdemo.svg?branch=master)](https://travis-ci.org/aesalazar/windowmanagerjsdemo)
 
 This is a simple demonstration of the windowmanagerjs module that shows the ability to create draggable windows inside an HTML page regardless of runtime.  A single codeset was written that generates interactive windows in any modern browser OR in native desktop applications contained in the Chromium-based OpenFin and Electron runtimes.  
 
