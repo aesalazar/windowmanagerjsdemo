@@ -1,4 +1,5 @@
 {
     "main": "windowmanager.js",
-    "endpoint": "http://localhost:5000/"
+    "endpoint": "http://localhost:5000/",
+    "config": "http://localhost:5000/app.json"
 }
