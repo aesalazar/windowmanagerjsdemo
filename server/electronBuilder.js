@@ -10,23 +10,24 @@ mimes.set("zip", "zip");
 mimes.set("AppImage", "x-executable");
 
 //Development package.json, see https://goo.gl/5jVxoO
-const devMetadata  = packageJson.electronBuilder;
+const config = packageJson.electronBuilder;
 
 //Application package.json
 const appMetadata = {
     name: packageJson.name,
     version: packageJson.version,
     description: packageJson.description,
-    author: packageJson.author
+    author: packageJson.author,
+    company: packageJson.company
 };
 
-function buildPromise(){
-    // Copy windowmanager as main.js for electron
-    fs.writeFileSync("./electron/app/windowmanager.js", fs.readFileSync(windowmanager.debug.scriptPath));
+// Copy windowmanager as main.js for electron
+fs.writeFileSync("./electron/app/windowmanager.js", fs.readFileSync(windowmanager.debug.scriptPath));
 
+function buildPromise(){
     return new Promise((resolve, reject) => {
         builder
-            .build({ projectDir: "./", devMetadata, appMetadata })
+            .build({ projectDir: "./", config, appMetadata })
             .then(args => {
                 const filePath = args[0];
                 const fileName = filePath.substr(filePath.replace(/\\/g,"/").lastIndexOf("/") + 1);

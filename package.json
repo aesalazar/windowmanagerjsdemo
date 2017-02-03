@@ -29,29 +29,32 @@
   },
   "devDependencies": {
     "electron": "^1.4.14",
-    "electron-builder": "^10.17.3",
+    "electron-builder": "^12.3.1",
     "openfin-cli": "^1.1.5"
   },
   "electronBuilder": {
-    "build": {
-      "productName": "Eikos Partners windowmanager Demo",
-      "appId": "EikosPartners.WindowManagerDemo",
-      "asar": false,
-      "win": {
-        "iconUrl": "http://localhost:5000/images/eikos-logo-multi.ico",
-        "target": "nsis"
-      },
-      "nsis": {
-        "oneClick": false,
-        "allowElevation": false
-      },
-      "linux": {
-        "target": "AppImage",
-        "category": "Development"
-      },
-      "mac": {
-        "target": "dmg"
-      }
+    "productName": "Eikos Partners windowmanager Demo",
+    "appId": "EikosPartners.WindowManagerDemo",
+    "asar": true,
+    "win": {
+      "iconUrl": "http://localhost:5000/images/eikos-logo-multi.ico",
+      "icon": "electron/resources/icon.ico",
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "electron/resources/icon.ico",
+      "installerHeader": "electron/resources/mui_headerimage.bmp",
+      "installerHeaderIcon": "electron/resources/icon.ico"
+    },
+    "linux": {
+      "target": "AppImage",
+      "category": "Development"
+    },
+    "mac": {
+      "target": "dmg"
     },
     "directories": {
       "output": "electron/output",
