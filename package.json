@@ -8,7 +8,8 @@
     "start": "node app.js",
     "openfin": "node_modules/.bin/openfin --launch --config http://localhost:5000/app.json",
     "electron": "electron ./electron/app/windowmanager --debug=5858 --endpoint=http://localhost:5000/ --config=http://localhost:5000/app.json",
-    "electron-build": "node ./server/electronBuildCurrent.js"
+    "electron-build": "node ./server/electronBuildCurrent.js",
+    "test-travis": "echo TODO"
   },
   "jshintConfig": {
     "esversion": 6
