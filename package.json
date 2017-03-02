@@ -24,19 +24,19 @@
   "author": "Ernie Salazar",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.14.0",
-    "windowmanager": "^0.12.9",
-    "ws": "^1.1.1"
+    "express": "^4.15.0",
+    "windowmanager": "^0.13.1",
+    "ws": "^2.2.0"
   },
   "devDependencies": {
-    "electron": "^1.4.14",
-    "electron-builder": "^12.3.1",
+    "electron": "^1.6.1",
+    "electron-builder": "^14.5.3",
     "openfin-cli": "^1.1.5"
   },
   "electronBuilder": {
     "productName": "Eikos Partners windowmanager Demo",
     "appId": "EikosPartners.WindowManagerDemo",
-    "asar": true,
+    "asar": false,
     "win": {
       "iconUrl": "http://localhost:5000/images/eikos-logo-multi.ico",
       "icon": "electron/resources/icon.ico",

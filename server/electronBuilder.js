@@ -21,9 +21,6 @@ const appMetadata = {
     company: packageJson.company
 };
 
-// Copy windowmanager as main.js for electron
-fs.writeFileSync("./electron/app/windowmanager.js", fs.readFileSync(windowmanager.debug.scriptPath));
-
 function buildPromise(){
     return new Promise((resolve, reject) => {
         builder

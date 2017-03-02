@@ -1,5 +1,10 @@
 {
-    "main": "windowmanager.js",
-    "endpoint": "http://localhost:5000/",
-    "config": "http://localhost:5000/app.json"
+    "main": "app.js",
+    "windowmanager": {
+        "endpoint": "http://localhost:5000/",
+        "config": "http://localhost:5000/app.json"
+    },
+    "dependencies": {
+        "windowmanager": "^0.13.1"
+    }
 }

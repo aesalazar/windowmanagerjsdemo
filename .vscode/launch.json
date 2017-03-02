@@ -21,9 +21,9 @@
             "type": "node",
             "request": "launch",
             "name": "Debug Electron Main",
-            "program": "${workspaceRoot}/electron/app/windowmanager.js",
+            "program": "${workspaceRoot}/electron/app/app.js",
             "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd",
-            "cwd": "${workspaceRoot}"
-        }           
+            "cwd": "${workspaceRoot}/electron/app"
+        }
     ]
 }

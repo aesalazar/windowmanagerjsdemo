@@ -89,6 +89,7 @@ function createWindow(windowSize){
 
     state.url = "child.html";
     state.title = "Window " + (windowSize && windowSize.windowAppIndex  ? windowSize.windowAppIndex : ++windowAppIndex);
+    state.frame = false;
 
     //Create the window
     var win = new windowmanager.Window(state);
