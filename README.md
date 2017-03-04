@@ -57,7 +57,7 @@ More information about the Electron runtime <a href="http://electron.atom.io/" t
     <img style="border-color:gray; border-style:solid; border-width: 1px; margin: 0 auto; display:block; width:80%;" src="public/images/OpenfinScreeny.gif" alt="OpenFin Screen Shot">
 </a>
 
-OpenFin is also a Chromium container based on Electron that allows native desktop applications in Windows, macOS and Linux.  It provides several additions to including subscription based support with guaranteed response times, enterprise version management, and cross-language APIs (.Net, Java, etc.).  
+OpenFin is also a Chromium container based on Electron that allows native desktop applications in Windows, macOS and Linux.  Besides all standard Electron functionally, OpenFin  includes subscription-based support with guaranteed response times, enterprise version management, and cross-language APIs (.Net, Java, etc.).  
 
 With the node server running, start the application in OpenFin with following command line in the root folder:
 
