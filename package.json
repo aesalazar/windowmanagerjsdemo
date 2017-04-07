@@ -24,10 +24,10 @@
   "author": "Ernie Salazar",
   "license": "MIT",
   "dependencies": {
-    "electron": "^1.6.4",
+    "electron": "^1.6.5",
     "express": "^4.15.2",
-    "windowmanager": "^0.13.6",
-    "ws": "^2.2.2"
+    "windowmanager": "^0.13.8",
+    "ws": "^2.2.3"
   },
   "devDependencies": {
     "electron": "^1.6.1",
