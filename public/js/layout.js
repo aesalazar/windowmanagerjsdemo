@@ -2,7 +2,7 @@ let state = {
     width: 400, 
     height: 400,
     url: 'child.html',
-    title: 'Window',
+    title: 'Window' //+ windowmanager.Window.getAll().length,
     frame: false 
 };
 

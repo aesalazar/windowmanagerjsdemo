@@ -6,7 +6,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "openfin": "node_modules/.bin/openfin --launch --config http://localhost:5000/app.json",
+    "openfin": "node_modules/.bin/openfin --launch --config http://localhost:2323/app.json",
     "electron": "electron ./electron/app/main --debug=5858",
     "electron-build": "node ./server/electronBuildCurrent.js",
     "test-travis": "echo TODO"
@@ -26,7 +26,7 @@
   "dependencies": {
     "electron": "^1.6.5",
     "express": "^4.15.2",
-    "windowmanager": "^0.14.3",
+    "windowmanager": "git://github.com/eikospartners/windowmanagerjs.git#feature-layout",
     "ws": "^2.2.3"
   },
   "devDependencies": {
@@ -39,7 +39,7 @@
     "appId": "EikosPartners.WindowManagerDemo",
     "asar": true,
     "win": {
-      "iconUrl": "http://localhost:5000/images/eikos-logo-multi.ico",
+      "iconUrl": "http://localhost:6000/images/eikos-logo-multi.ico",
       "icon": "electron/resources/icon.ico",
       "target": "nsis"
     },
