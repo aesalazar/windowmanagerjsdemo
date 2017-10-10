@@ -14,6 +14,11 @@ router.get('/install', function(req, res, next){
     res.sendFile('install.html', { root: 'public' });
 });
 
+// Example page for layout.
+router.get('/layout', (req, res) => {
+    res.sendFile('layout.html', { root: 'public' });
+});
+
 //Install page for Electron Application
 router.get('/electron', function(req, res, next){
     electronBuilder()

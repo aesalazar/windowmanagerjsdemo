@@ -8,7 +8,7 @@ const api = require('./server/api');
 const utils = require('./server/utils');
 
 //Port settings
-const webPort = 5000;
+const webPort = 2323;
 
 //Setup the web and websocket servers
 const app = express();
