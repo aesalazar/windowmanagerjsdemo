@@ -5,6 +5,6 @@
         "config": "http://localhost:5000/app.json"
     },
     "dependencies": {
-        "windowmanager": "^0.13.6"
+        "windowmanager": "0.13.9"
     }
 }
