@@ -1,8 +1,8 @@
 {
     "main": "main.js",
     "windowmanager": {
-        "endpoint": "http://localhost:2323/",
-        "config": "http://localhost:2323/app.json"
+        "endpoint": "http://localhost:5000/",
+        "config": "http://localhost:5000/app.json"
     },
     "dependencies": {
         "windowmanager": "0.13.9"

@@ -6,7 +6,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "openfin": "node_modules/.bin/openfin --launch --config http://localhost:2323/app.json",
+    "openfin": "node_modules/.bin/openfin --launch --config http://localhost:5000/app.json",
     "electron": "electron ./electron/app/main --debug=5858",
     "electron-build": "node ./server/electronBuildCurrent.js",
     "test-travis": "echo TODO"
