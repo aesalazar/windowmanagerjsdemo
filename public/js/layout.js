@@ -36,10 +36,9 @@ let state5 = {
 
 let configs = [state1, state2, state3, state4, state5];
 
-let layout = new windowmanager.Layout('tabbed', 'layout-example', configs); 
+let layout = new windowmanager.Layout('tiled', 'layout-example', configs); 
 
 function addWindow() {
-    debugger
     layout.addWindow({
         width: 400, 
         height: 400,

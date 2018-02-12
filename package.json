@@ -25,11 +25,11 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.16.2",
-    "windowmanager": "git://github.com/eikospartners/windowmanagerjs.git#feature-layout",
+    "windowmanager": "git@github.com:EikosPartners/windowmanagerjs.git",
     "ws": "^2.2.3"
   },
   "devDependencies": {
-    "electron": "^1.8.1",
+    "electron": "^1.8.2",
     "electron-builder": "^12.3.1",
     "openfin-cli": "^1.1.5"
   },
